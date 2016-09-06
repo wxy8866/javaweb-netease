@@ -5,7 +5,7 @@
 
 
 <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	<property name="location" value="classpath:service.properties"></property>
+	<property name="location" value="classpath:account-email.properties"></property>
 </bean>
 
 <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -14,7 +14,16 @@
 	<property name="port" value="${email.port}"></property>
 	<property name="username" value="${email.username}"></property>
 	<property name="password" value="${email.password}"></property>
-	<property name="javaMailProperties" value="${email.protocol}"></property>
+	<property name="javaMailProperties">
+		<props>
+			<prop key="mail.${email.protocol}.auth">${email.auth}</prop>
+		</props>
+	</property>
+</bean>
+
+<bean id="accountEmailService" class="com.wxy8866.mvnstudy.account.email.AccountEmailServiceImpl">
+	<property name="javaMailSender" ref="javaMailSender"></property>
+	<property name="systemEmail" value="${email.systemEmail}"></property>
 </bean>
 
 </beans>
