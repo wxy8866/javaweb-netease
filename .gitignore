@@ -49,3 +49,17 @@ local.properties
 target/
 out/
 build/
+
+*.DS_Store
+*.iml
+.classpath
+.project
+.settings
+.idea
+.springBeans
+.checkstyle
+target
+bin/
+logs/
+src/main/webapp/WEB-INF/classes/
+src/main/webapp/WEB-INF/lib/
