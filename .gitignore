@@ -1,5 +1,5 @@
 ## .gitignore for mac os x
-
+.myumldata
 .DS_Store
 .AppleDouble
 .LSOverride
