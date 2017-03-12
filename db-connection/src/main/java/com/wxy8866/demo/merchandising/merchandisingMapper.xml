@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxy8866.demo.merchandising.Op">
+	<select id="getUser" parameterType="int" resultMap="UserMap">
+		select
+		user.id as userID,userName,tel,product.id as productID
+		from user
+		left join transaction on user.id = transaction.userid
+		left join product on transaction.productid = product.id
+		where user.id = #{id}
+	</select>
+	<select id="getProduct" parameterType="int"
+		resultType="com.wxy8866.demo.merchandising.Product">
+		select id,productName,catalog from product where id = #{id}
+	</select>
+
+	<resultMap id="UserMap" type="com.wxy8866.demo.merchandising.User">
+		<constructor>
+			<idArg column="userID" javaType="int" />
+			<arg column="userName" javaType="String" />
+			<arg column="tel" javaType="String" />
+		</constructor>
+		<collection property="products" ofType="Integer"/>
+	</resultMap>
+</mapper>
